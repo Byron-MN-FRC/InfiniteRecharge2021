@@ -167,11 +167,11 @@ pigeon = new PigeonIMU(4);
      double max = 1.0;
         if (RobotContainer.getInstance().getm_shifter().highGear == true){
             max = .7;
-           /* leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
-            leftMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
-            rightMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
-            rightMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
-            tankDrive.arcadeDrive(y, twist);*/
+            leftMaster.configOpenloopRamp(.75,Constants.kTimeoutMs);
+            rightMaster.configOpenloopRamp(.75,Constants.kTimeoutMs);
+        }else { 
+            leftMaster.configOpenloopRamp(.5,Constants.kTimeoutMs);
+            rightMaster.configOpenloopRamp(.5,Constants.kTimeoutMs);
         }
 
         leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
@@ -516,8 +516,8 @@ pigeon = new PigeonIMU(4);
         leftMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
         rightMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
         rightMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
-        leftMaster.configOpenloopRamp(1.0,Constants.kTimeoutMs);
-        rightMaster.configOpenloopRamp(1.0,Constants.kTimeoutMs);
+        leftMaster.configOpenloopRamp(.5,Constants.kTimeoutMs);
+        rightMaster.configOpenloopRamp(.5,Constants.kTimeoutMs);
     //    leftMaster.configOpenloopRamp(1.5,Constants.kTimeoutMs);
     //    leftMaster.configOpenloopRamp(1.5,Constants.kTimeoutMs);
         System.out.println("TeleopLimiting activated");
