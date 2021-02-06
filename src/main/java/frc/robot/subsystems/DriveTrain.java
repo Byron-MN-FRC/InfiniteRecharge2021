@@ -164,29 +164,21 @@ pigeon = new PigeonIMU(4);
         // syntax
 
      //   twist = (twist < 0) ? -Math.pow(Deadband(twist), 2) : Math.pow(Deadband(twist), 2);
-
+     double max = 1.0;
         if (RobotContainer.getInstance().getm_shifter().highGear == true){
-            double max = .7;
-            leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
+            max = .7;
+           /* leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
             leftMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
             rightMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
             rightMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
-      //      y = ThrottleLookup.calcJoystickCorrection("HighGearRamp", y);
-            // twist = ThrottleLookup.calcJoystickCorrection("HighGearTurn", twist);
-       //     twist = (twist < 0) ? -Math.pow(Deadband(twist), 2) : Math.pow(Deadband(twist), 2);
-            tankDrive.arcadeDrive(y, twist);
-        }else {
-            double max = .4;
-            double maxxx = 1.0;
-            leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
-            leftMaster.configPeakOutputReverse(-maxxx, Constants.kTimeoutMs);
-            rightMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
-            rightMaster.configPeakOutputReverse(-maxxx, Constants.kTimeoutMs);
-        //    y = ThrottleLookup.calcJoystickCorrection("LowGearRamp", y);
-        //    twist = ThrottleLookup.calcJoystickCorrection("LowGearTurn", twist);
-            tankDrive.arcadeDrive(y,  twist);
+            tankDrive.arcadeDrive(y, twist);*/
         }
 
+        leftMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
+        leftMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
+        rightMaster.configPeakOutputForward(max, Constants.kTimeoutMs);
+        rightMaster.configPeakOutputReverse(-max, Constants.kTimeoutMs);
+        tankDrive.arcadeDrive(y,  twist);        
     }
 
     public void motorConfig() {
@@ -528,6 +520,7 @@ pigeon = new PigeonIMU(4);
         rightMaster.configOpenloopRamp(1.0,Constants.kTimeoutMs);
     //    leftMaster.configOpenloopRamp(1.5,Constants.kTimeoutMs);
     //    leftMaster.configOpenloopRamp(1.5,Constants.kTimeoutMs);
+        System.out.println("TeleopLimiting activated");
     }
 
     public TalonFXConfiguration getRightMotor() {

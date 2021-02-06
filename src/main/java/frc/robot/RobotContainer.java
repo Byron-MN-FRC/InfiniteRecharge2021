@@ -125,6 +125,10 @@ public Joystick getDriveJoystick() {
 public Shifter getm_shifter(){
         return m_shifter;
     }
+
+public DriveTrain getm_driveTrain(){
+        return m_driveTrain;
+}
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
