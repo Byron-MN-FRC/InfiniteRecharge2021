@@ -163,7 +163,7 @@ pigeon = new PigeonIMU(4);
         // limit the turn to the square of the number. Keep signs straight use ? :
         // syntax
 
-        twist = (twist < 0) ? -Math.pow(Deadband(twist), 2) : Math.pow(Deadband(twist), 2);
+     //   twist = (twist < 0) ? -Math.pow(Deadband(twist), 2) : Math.pow(Deadband(twist), 2);
 
         if (RobotContainer.getInstance().getm_shifter().highGear == true){
             double max = .7;
@@ -174,7 +174,7 @@ pigeon = new PigeonIMU(4);
       //      y = ThrottleLookup.calcJoystickCorrection("HighGearRamp", y);
             // twist = ThrottleLookup.calcJoystickCorrection("HighGearTurn", twist);
        //     twist = (twist < 0) ? -Math.pow(Deadband(twist), 2) : Math.pow(Deadband(twist), 2);
-            tankDrive.arcadeDrive(y, -twist);
+            tankDrive.arcadeDrive(y, twist);
         }else {
             double max = .4;
             double maxxx = 1.0;
@@ -184,7 +184,7 @@ pigeon = new PigeonIMU(4);
             rightMaster.configPeakOutputReverse(-maxxx, Constants.kTimeoutMs);
         //    y = ThrottleLookup.calcJoystickCorrection("LowGearRamp", y);
         //    twist = ThrottleLookup.calcJoystickCorrection("LowGearTurn", twist);
-            tankDrive.arcadeDrive(y, -twist);
+            tankDrive.arcadeDrive(y,  twist);
         }
 
     }
