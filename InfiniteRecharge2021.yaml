@@ -331,7 +331,7 @@ Children:
     - Children: []
       Properties:
         Interruptible: !!robotbuilder.data.properties.BooleanProperty {default: true,
-          name: Interruptible, validators: null, value: true}
+          name: Interruptible, validators: null, value: false}
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
           name: Joystick, validators: null, value: DriveJoystick}
         Parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -352,7 +352,7 @@ Children:
           validators: *id010
           value: reverseAcquisition
         Timeout: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Timeout,
-          validators: null, value: -0.7}
+          validators: null, value: 3.0}
         Add Timeout: !!robotbuilder.data.properties.BooleanProperty {default: false,
           name: Add Timeout, validators: null, value: true}
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
@@ -667,9 +667,9 @@ Children:
           validators: *id010
           value: teleopAutoShootCMD
         Timeout: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Timeout,
-          validators: null, value: 0.0}
+          validators: null, value: 10.0}
         Add Timeout: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Add Timeout, validators: null, value: false}
+          name: Add Timeout, validators: null, value: true}
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id011
           default: whenPressed
