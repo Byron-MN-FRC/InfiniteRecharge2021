@@ -60,6 +60,21 @@ public class Robot extends TimedRobot {
         SmartDashboard.putString(Constants.autoPosition, "L");
         LimelightUtility.WriteDouble("ledMode", 1); // 3 = Limelight O
     }
+    /**
+    * This function is called every robot packet, no matter the mode. Use this for items like
+    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
+    *
+    * <p>This runs after the mode specific periodic functions, but before
+    * LiveWindow and SmartDashboard integrated updating.
+    */
+    @Override
+    public void robotPeriodic() {
+        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+        // commands, running already-scheduled commands, removing finished or interrupted commands,
+        // and running subsystem periodic() methods.  This must be called from the robot's periodic
+        // block in order for anything in the Command-based framework to work.
+        CommandScheduler.getInstance().run();
+    }
 
     /**
      * This function is called when the disabled button is hit. You can use it to
@@ -76,16 +91,17 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
-        CommandScheduler.getInstance().run();
+        //CommandScheduler.getInstance().run();
     }
 
 
     @Override
     public void autonomousInit() {
-        initializeSubsystems();
+        m_autonomousCommand = m_RobotContainer.getAutonomousCommand();
+        //initializeSubsystems();
         //Robot.driveTrain.autonomousLimiting();        
         // schedule the autonomous command (example)
-        // if (autonomousCommand != null) autonomousCommand.start();
+        if (m_autonomousCommand != null) m_autonomousCommand.schedule();
 
         
     }
@@ -95,7 +111,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        ballShooter.inAuton = true;
+        //ballShooter.inAuton = true;
         SmartDashboard.putBoolean("drive/LimeLight Target", LimelightUtility.ValidTargetFound());
         CommandScheduler.getInstance().run();
         SmartDashboard.putNumber("drive/Game Timer", Timer.getMatchTime());
@@ -108,8 +124,8 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        // if (autonomousCommand != null)
-        // autonomousCommand.cancel();
+        if (m_autonomousCommand != null)
+            m_autonomousCommand.cancel();
 
 
         // Robot.driveTrain.teleopLimiting();
@@ -122,22 +138,22 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        ballShooter.inAuton = false;
-        CommandScheduler.getInstance().run();
+        //ballShooter.inAuton = false;
+        //CommandScheduler.getInstance().run();
         LimelightUtility.RefreshTrackingData();
         SmartDashboard.putBoolean("drive/LimeLight Target", LimelightUtility.ValidTargetFound());
         SmartDashboard.putNumber("drive/Game Timer", Timer.getMatchTime());
     }
 
     public void initializeSubsystems() {
-        //Robot.driveTrain.motorConfig();
-        //Robot.driveTrain.zeroSensors();
-        //Robot.ballIndexer.reinitializeIndexer();
-        //Robot.ballIndexer.resetCount();
-        //Robot.driveTrain.reinitializeDriveTrain();
-        //Robot.ballShooter.reinitializeShooter();
-        //Robot.shifter.reinitializeShifter();
-        //Robot.ballAcquisition.reinitializeAquisition();
+        RobotContainer.getInstance().m_driveTrain.motorConfig();
+        RobotContainer.getInstance().m_driveTrain.zeroSensors();
+        RobotContainer.getInstance().m_ballIndexer.reinitializeIndexer();
+        RobotContainer.getInstance().m_ballIndexer.resetCount();
+        RobotContainer.getInstance().m_driveTrain.reinitializeDriveTrain();
+        RobotContainer.getInstance().m_ballShooter.reinitializeShooter();
+        RobotContainer.getInstance().m_shifter.reinitializeShifter();
+        RobotContainer.getInstance().m_ballAcquisiton.reinitializeAquisition();
         LimelightUtility.WriteDouble("ledMode", 1); // 3 = Limelight O
     }
 }
