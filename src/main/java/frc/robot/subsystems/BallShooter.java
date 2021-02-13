@@ -88,6 +88,7 @@ limitSwitchDown = new DigitalInput(0);
             SmartDashboard.putNumber("test/shooter/F", .0495);
             SmartDashboard.putNumber("test/shooter/targetPosition", 3000);
         }
+        LimelightUtility.EnableDriverCamera(false);
     }
 
     /*@Override

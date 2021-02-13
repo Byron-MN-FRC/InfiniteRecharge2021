@@ -126,8 +126,8 @@ btnStopTeleopAutoShoot.whenReleased(new teleopAutoShootCMD( m_ballShooter ) ,tru
     SmartDashboard.putData("btnStopTeleopAutoShoot",new teleopAutoShootCMD( m_ballShooter ) );
 
 final JoystickButton btnTeleopAutoShoot = new JoystickButton(driveJoystick, 3);        
-btnTeleopAutoShoot.whileHeld(new teleopAutoShootCMD( m_ballShooter ) ,true);
-    SmartDashboard.putData("btnTeleopAutoShoot",new teleopAutoShootCMD( m_ballShooter ) );
+btnTeleopAutoShoot.whileHeld(new teleopAutoShootCMD( m_ballShooter ).withTimeout(10.0) ,true);
+    SmartDashboard.putData("btnTeleopAutoShoot",new teleopAutoShootCMD( m_ballShooter ).withTimeout(10.0) );
 
 final JoystickButton btnStopFlyWheel = new JoystickButton(driveJoystick, 4);        
 btnStopFlyWheel.whenReleased(new stopFlyWheel( m_ballShooter ) ,true);
@@ -138,8 +138,8 @@ btnSpinUp.whileHeld(new spinUp( m_ballShooter ) ,true);
     SmartDashboard.putData("btnSpinUp",new spinUp( m_ballShooter ) );
 
 final JoystickButton btnReverseIndex = new JoystickButton(driveJoystick, 7);        
-btnReverseIndex.whileHeld(new indexReverseOne( m_ballIndexer ) ,true);
-    SmartDashboard.putData("btnReverseIndex",new indexReverseOne( m_ballIndexer ) );
+btnReverseIndex.whileHeld(new indexReverseOne( m_ballIndexer ).withTimeout(0.0) ,true);
+    SmartDashboard.putData("btnReverseIndex",new indexReverseOne( m_ballIndexer ).withTimeout(0.0) );
 
 final JoystickButton btnLimeLightOff = new JoystickButton(driveJoystick, 9);        
 btnLimeLightOff.whenPressed(new turnLimeLightOff() ,true);
@@ -162,8 +162,8 @@ btnShiftDown.whenPressed(new shiftDown( m_driveTrain ) ,true);
     SmartDashboard.putData("btnShiftDown",new shiftDown( m_driveTrain ) );
 
 final JoystickButton btnReverseAcquire = new JoystickButton(driveJoystick, 2);        
-btnReverseAcquire.whileHeld(new reverseAcquisition() ,true);
-    SmartDashboard.putData("btnReverseAcquire",new reverseAcquisition() );
+btnReverseAcquire.whileHeld(new reverseAcquisition().withTimeout(3.0) ,false);
+    SmartDashboard.putData("btnReverseAcquire",new reverseAcquisition().withTimeout(3.0) );
 
 final JoystickButton btnAcquire = new JoystickButton(driveJoystick, 1);        
 btnAcquire.whileHeld(new startAcquisition( m_ballAcquisiton ) ,true);
@@ -193,6 +193,7 @@ public DriveTrain getm_driveTrain(){
 public BallIndexer getm_ballIndexer(){
     return m_ballIndexer;
 }
+ 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
