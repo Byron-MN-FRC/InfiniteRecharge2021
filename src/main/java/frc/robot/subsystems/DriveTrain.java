@@ -359,6 +359,13 @@ pigeon = new PigeonIMU(4);
     }
 
     /** Zero all sensors, both Talons and Pigeon */
+    public void zeroSensors() {
+        leftMaster.getSensorCollection().setIntegratedSensorPosition(0, Constants.kTimeoutMs);
+        rightMaster.getSensorCollection().setIntegratedSensorPosition(0, Constants.kTimeoutMs);
+        pigeon.setYaw(0, Constants.kTimeoutMs);
+        pigeon.setAccumZAngle(0, Constants.kTimeoutMs);
+        System.out.println("Integrated Encoders + Pigeon] All sensors are zeroed.\n");
+    }
 
     void setRobotDistanceConfigs(TalonFXInvertType masterInvertType, TalonFXConfiguration masterConfig) {
         /**
