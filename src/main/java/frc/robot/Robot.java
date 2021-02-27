@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.LimelightUtility.StreamMode;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.BallAcquisiton;
 import frc.robot.subsystems.BallIndexer;
 import frc.robot.subsystems.BallShooter;
@@ -85,24 +86,23 @@ public class Robot extends TimedRobot {
         // Set the limelight so that it can be configured.
         LimelightUtility.EnableDriverCamera(false);
         LimelightUtility.StreamingMode(StreamMode.Standard);
-        //Robot.ballShooter.teleopWithIdle = false;
-        //Robot.ballShooter.setShootIdleVelocity(0);
+        RobotContainer.getInstance().m_ballShooter.teleopWithIdle = false;
+        RobotContainer.getInstance().m_ballShooter.setShootIdleVelocity(0);
     }
 
     @Override
     public void disabledPeriodic() {
-        //CommandScheduler.getInstance().run();
+        CommandScheduler.getInstance().run();
     }
 
 
     @Override
     public void autonomousInit() {
         m_autonomousCommand = m_RobotContainer.getAutonomousCommand();
-        //initializeSubsystems();
-        //Robot.driveTrain.autonomousLimiting();        
+        initializeSubsystems();
+        RobotContainer.getInstance().m_driveTrain.autonomousLimiting();        
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) m_autonomousCommand.schedule();
-
         
     }
 
@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        //ballShooter.inAuton = true;
+        RobotContainer.getInstance().m_ballShooter.inAuton = true;
         SmartDashboard.putBoolean("drive/LimeLight Target", LimelightUtility.ValidTargetFound());
         CommandScheduler.getInstance().run();
         SmartDashboard.putNumber("drive/Game Timer", Timer.getMatchTime());
@@ -130,7 +130,7 @@ public class Robot extends TimedRobot {
 
         // Robot.driveTrain.teleopLimiting();
         initializeSubsystems();
-        //Robot.driveTrain.teleopLimiting();
+        //Robot.driveTrain.teleopLimiting(); - moved to drivtrain ramp
     }
 
     /**
@@ -138,8 +138,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        //ballShooter.inAuton = false;
-        //CommandScheduler.getInstance().run();
+        RobotContainer.getInstance().m_ballShooter.inAuton = false;
+        CommandScheduler.getInstance().run();
         LimelightUtility.RefreshTrackingData();
         SmartDashboard.putBoolean("drive/LimeLight Target", LimelightUtility.ValidTargetFound());
         SmartDashboard.putNumber("drive/Game Timer", Timer.getMatchTime());
